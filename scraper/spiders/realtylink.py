@@ -1,12 +1,16 @@
 import scrapy
 import json
 
+from urllib.parse import urljoin
+
 
 class RealtyLinkSpider(scrapy.Spider):
     name = "realtylink"
     start_urls = [
         "https://realtylink.org/en/properties~for-rent/",
     ]
+
+    BASE_URL = "https://realtylink.org/"
 
     def parse(
         self, response: scrapy.http.Response, **kwargs
@@ -18,10 +22,10 @@ class RealtyLinkSpider(scrapy.Spider):
     ) -> scrapy.Request:
         pass
 
-    def _parse_item(self, response: scrapy.http.Response, **kwargs) -> dict:
+    def _parse_item(self, response: scrapy.http.Response) -> dict:
         # TODO 1: Find the date published or updated
-        # TODO 2: Add the link, which refer to the ad
-        # link_on_ad = kwargs.get("href")
+        url = response.css("span[id='SummaryUrl']::text").get()
+        link_on_ad = urljoin(self.BASE_URL, url)
         title = response.css("span[data-id='PageTitle']::text").get()
         full_address = (
             response.css("h2[itemprop='address']::text").get().strip()
@@ -45,6 +49,7 @@ class RealtyLinkSpider(scrapy.Spider):
         num_of_rooms = int(bedrooms.strip().split()[0]) if bedrooms else 1
 
         return {
+            "link_on_add": link_on_ad,
             "title": title,
             "region": region,
             "full_address": full_address,

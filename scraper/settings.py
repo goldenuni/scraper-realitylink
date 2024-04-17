@@ -12,6 +12,8 @@ BOT_NAME = "scraper"
 SPIDER_MODULES = ["scraper.spiders"]
 NEWSPIDER_MODULE = "scraper.spiders"
 
+# ITEM LISTENING FOR SPIDER
+CLOSESPIDER_ITEMCOUNT = 60
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = "Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"

@@ -1,6 +1,6 @@
 # Scraping of Real Estate Listings 🏠
 
-Welcome to the scraping and analysis project for real estate listings dataset from RealtyLink.org!
+Welcome to the scraping project for the real estate listings dataset from RealtyLink.org!
 
 ## Project Overview📖
 
